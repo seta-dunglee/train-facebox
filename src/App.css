@@ -1,0 +1,85 @@
+@import "~antd/dist/antd.css";
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.ant-layout-header h2 {
+  color: #ddd;
+  text-align: center;
+  margin: 10px;
+}
+
+.content-body {
+  background: #fff;
+  padding: 24px;
+  min-height: 80vh;
+}
+
+.breadcrumb {
+  padding: 0 30px;
+  margin: 16px 0;
+}
+
+.container {
+  margin: 0 30px;
+}
+
+.list-people {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.result-search {
+  margin: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 50px
+}
+
+.result-search-image {
+  margin: 15px 15px 10px 0px;
+  position: relative;
+  cursor: pointer;
+}
+
+.person {
+  margin-right: 15px;
+}
+
+.icon-select {
+  position: absolute;
+  color: #1faf09;
+  background: #fff;
+  right: 0;
+}
+
+.gallery-images {
+  display: block;
+  min-height: 1px;
+  width: 100%;
+  /* border: 1px solid #ddd; */
+  overflow: auto;
+  text-align: center;
+  background: white;
+}
