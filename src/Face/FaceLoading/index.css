@@ -1,0 +1,19 @@
+.loading-indicator {
+    box-sizing: border-box;
+    height: 120px;
+    width: 120px;
+    border: 2px solid #ccebff;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

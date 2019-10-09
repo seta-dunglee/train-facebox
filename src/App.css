@@ -83,3 +83,13 @@
   text-align: center;
   background: white;
 }
+
+.take-photo{
+  margin-left: 15px;
+}
+
+.camera-wapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
