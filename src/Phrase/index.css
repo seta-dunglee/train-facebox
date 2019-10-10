@@ -1,0 +1,31 @@
+.pharseWrapper.ant-card{
+    -webkit-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+    margin: 5px;
+}
+
+.pharseWrapper.hightlight {
+    background: linear-gradient(45deg, #2196F3 30%, #21CBF3 90%);
+}
+
+.pharseWrapper:hover {
+    background: linear-gradient(45deg, #2196F3 30%, #21CBF3 90%) ;
+}
+
+.pharseWrapper:hover button {
+    background: #ffffff;
+}
+
+.pharseWrapper button {
+    margin:  10px 10px 10px 0;
+}
+
+.pharseWrapper .phraseVoice {
+    font-size: 16px;
+    line-height: unset;
+}
+
+.pharseWrapper .phraseVoice i {
+    margin-right: 20px;
+}

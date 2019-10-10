@@ -4,6 +4,7 @@ import "./index.css";
 import { Steps, Icon } from "antd";
 import FaceTraining from "./FaceTraining";
 import { Typography } from 'antd';
+import VoiceTraining from "./VoiceTraning";
 
 const { Title } = Typography;
 const { Step } = Steps;
@@ -18,7 +19,7 @@ export default function Training({ person }) {
     },
     {
       title: "Training Voice",
-      content: "Training Voice",
+      content: <VoiceTraining person={person} />,
       icon: <Icon type="sound" />
     }
   ];

@@ -26,3 +26,11 @@
 .input-section button{
     margin-left: 15px;
 }
+
+.uploadButton.ant-btn {
+  width: 100%;
+  background: linear-gradient(45deg, #1d976c 30%, #93f9b9 90%);
+  color: #ffffff;
+  height: 50px;
+  font-size: 30px;
+}
