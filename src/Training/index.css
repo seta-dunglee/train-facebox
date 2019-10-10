@@ -1,0 +1,28 @@
+.steps-content{
+    margin-top: 20px;
+}
+
+.gallery-images {
+    display: block;
+    min-height: 1px;
+    width: 100%;
+    /* border: 1px solid #ddd; */
+    overflow: auto;
+    text-align: center;
+    background: white;
+    margin-top: 15px;
+  }
+  
+  .take-photo{
+    margin-left: 15px;
+  }
+  
+  .camera-wapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+.input-section button{
+    margin-left: 15px;
+}
