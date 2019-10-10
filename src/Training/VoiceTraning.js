@@ -6,13 +6,9 @@ import { createAssetAudio } from '../services/audio';
 
 function VoiceTraning({ person }) {
     const [phrases] = useState([
-        'I love to sing ',
-        'where are you going',
-        'can I call you tomorrow',
-        'why did you talk',
-        'she enjoys reading books',
-        'where are you going',
-        'have a great day',
+        "I can drink coffee everyday",
+        "We can join this meeting",
+        "What time does it take"
     ]);
     const [recorders, setRecorders] = useState([]);
 

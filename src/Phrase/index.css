@@ -29,3 +29,7 @@
 .pharseWrapper .phraseVoice i {
     margin-right: 20px;
 }
+
+.pharseWrapper .ant-card-body {
+    padding : 12px;
+}
