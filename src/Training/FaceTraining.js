@@ -132,7 +132,7 @@ export default function FaceTraining({
         </Button>
         {resultTrain && (
           <Text type="secondary" style={{marginLeft: 10}}>
-            Thành công: {resultTrain.success}/{resultTrain.total}
+            Success: {resultTrain.success}/{resultTrain.total}
           </Text>
         )}
       </Row>
