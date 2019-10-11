@@ -168,14 +168,14 @@ export default function FaceTraining({
         )}
       </Row>
       <Row className="result-search">
-        <Col span={12}>
+        <Col xl={ 14 } lg={ 16 }>
           {takePhoto && (
             <div className="camera-wapper">
               {<VideoCapturing onCaptureSuccess={onCaptureSuccess} />}
             </div>
           )}
         </Col>
-        <Col span={12}>
+        <Col xl={ 10 } lg={ 8 }>
           <div className="gallery-images">
             {loading ? (
               <Spin size="large" />

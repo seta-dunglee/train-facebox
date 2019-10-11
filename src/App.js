@@ -28,7 +28,7 @@ function App() {
       </Header>
       <Content>
         <div className="content-body">
-          <div className="container">
+          {/* <div className="container"> */}
             {
               (function () {
                 switch (step) {
@@ -41,7 +41,7 @@ function App() {
                 }
               })()
             }
-          </div>
+          {/* </div> */}
         </div>
       </Content>
     </Layout>
