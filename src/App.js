@@ -1,14 +1,11 @@
 import React from "react";
 import "./App.css";
-import { Typography, Layout, Breadcrumb } from "antd";
-// import { Card } from "antd";
+import { Typography, Layout } from "antd";
 import PersonForm from "./PersonForm";
 import Training from "./Training";
-import trainFace from "./services/train";
 
 const { Title } = Typography;
 const { Header, Content, Footer } = Layout;
-// const { Meta } = Card;
 const PERSIONFORM = 0;
 const TRAINING = 1;
 
@@ -30,13 +27,8 @@ function App() {
         <Title level={2}>Activate CSSO Training</Title>
       </Header>
       <Content>
-        {/* <Breadcrumb className="breadcrumb">
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>Training</Breadcrumb.Item>
-        </Breadcrumb> */}
         <div className="content-body">
           <div className="container">
-            
             {
               (function () {
                 switch (step) {

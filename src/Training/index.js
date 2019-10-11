@@ -1,42 +1,43 @@
 import React from "react";
 
 import "./index.css";
-import { Steps, Icon } from "antd";
+import { Tabs, Icon } from "antd";
+
 import FaceTraining from "./FaceTraining";
-import { Typography } from 'antd';
+import { Typography } from "antd";
 import VoiceTraining from "./VoiceTraning";
 
+const { TabPane } = Tabs;
 const { Title } = Typography;
-const { Step } = Steps;
 
 export default function Training({ person }) {
-  const [current, setCurrent] = React.useState(0);
-  const steps = [
-    {
-      title: "Training Face",
-      content: <FaceTraining person={person} />,
-      icon: <Icon type="user" />
-    },
-    {
-      title: "Training Voice",
-      content: <VoiceTraining person={person} />,
-      icon: <Icon type="sound" />
-    }
-  ];
-
-  const onChange = current => {
-    setCurrent(current);
-  };
-
   return (
     <div>
       <Title level={3}>Training for name: {person.name}</Title>
-      <Steps type="navigation" current={current} onChange={onChange}>
-        {steps.map(item => (
-          <Step key={item.title} title={item.title} icon={item.icon} />
-        ))}
-      </Steps>
-      <div className="steps-content">{steps[current].content}</div>
+      <Tabs>
+        <TabPane
+          tab={
+            <span>
+              <Icon type="user" />
+              Training Face
+            </span>
+          }
+          key="1"
+        >
+          <FaceTraining person={person} />
+        </TabPane>
+        <TabPane
+          tab={
+            <span>
+              <Icon type="sound" />
+              Training Voice
+            </span>
+          }
+          key="2"
+        >
+          <VoiceTraining person={person} />
+        </TabPane>
+      </Tabs>
     </div>
   );
 }

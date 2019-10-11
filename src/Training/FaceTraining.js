@@ -95,6 +95,13 @@ export default function FaceTraining({
     return await trainFace({ ...person, images: selectedImages });
   };
 
+  const onReload = () => {
+    setinputUrl('');
+    setImages([]);
+    setLoading(false);
+    setTakePhoto(false);
+    setResultTrain(null);
+  }
   const disabledTrain = images.filter(image => image.isSelected).length === 0;
 
   return (
@@ -129,6 +136,15 @@ export default function FaceTraining({
           onClick={onTrain}
         >
           Train
+        </Button>
+        <Button
+          type="primary"
+          shape="round"
+          icon="reload"
+          loading={loading}
+          onClick={onReload}
+        >
+          Reset
         </Button>
         {resultTrain && (
           <Text type="secondary" style={{marginLeft: 10}}>
