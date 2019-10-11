@@ -1,11 +1,7 @@
-
-
 async function trainFace(person) {
-    console.log(person);
     let count = 0;
     for (let index = 0; index < person.images.length; index++) {
         const image = person.images[index];
-        console.log(image)
         if(image.blob){
             const file = blobToFile(image.blob, `${person.name.replace(' ', '_')}.png`)
             const res = await trainSingleImgByFile(file, person);

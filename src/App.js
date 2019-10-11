@@ -15,7 +15,7 @@ function App() {
 
   const formSubmit = (name) => {
     setPerson({
-      id: "seta_train_" + name.replace(' ', '_'),
+      id: "vtn" + name.replace(' ', '_'),
       name
     })
     setStep(TRAINING)

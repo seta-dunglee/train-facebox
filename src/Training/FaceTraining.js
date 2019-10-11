@@ -78,7 +78,8 @@ export default function FaceTraining({
           thumbnailWidth: img.naturalWidth,
           thumbnail: url,
           src: url,
-          blob: blob
+          blob: blob,
+          isSelected: true
         });
       };
       img.src = url;
