@@ -10,13 +10,11 @@ const AudioIcon = <Icon type="audio" theme="twoTone" twoToneColor="red" />;
 const AudioOffIcon = <Icon type="audio" theme="twoTone" twoToneColor="gray" />;
 
 function Pharse({
-    keyPhrase,
     textPhrase = '',
     clean = false,
     onRecord = () => { },
     onReset = () => { }
 }) {
-    const [highlight, setHighlight] = useState(false);
     const [phraseVoice, setPhraseVoice] = useState('');
     const [recorder, setRecorder] = useState(null);
     const [iconMic, setIconMic] = useState(AudioNoneIcon);
@@ -27,6 +25,16 @@ function Pharse({
             handleReset();
         }
     }, [clean]);
+
+    useEffect(() => {
+        if(recorder) {
+            setIconMic(AudioOffIcon);
+            setBtnDisabled(true);
+        }else {
+            setIconMic(AudioNoneIcon);
+            setBtnDisabled(false);
+        }
+    }, [recorder]);
 
     const processVoice = async dataPhrase => {
         const recording = await recordAudio();
@@ -43,21 +51,25 @@ function Pharse({
             setIconMic(AudioOffIcon);
         }
 
-        recognition.onresult = event => {
-            var speechResult = event.results[0][0].transcript.toLowerCase();
-            setPhraseVoice(speechResult);
+        recognition.onerror = ()  => {
+            setRecorder(null);
+            setPhraseVoice('');
         }
 
-        recognition.onspeechend = async () => {
-            recognition.stop();
+        recognition.onresult = async event => {
+            var speechResult = event.results[0][0].transcript.toLowerCase();
+            setPhraseVoice(speechResult);
             const resultRecording = await recording.stop();
             setRecorder(resultRecording);
-            onRecord(resultRecording, keyPhrase);
+            onRecord(resultRecording);
+        }
+
+        recognition.onspeechend = () => {
+            recognition.stop();
         }
     }
 
     const handleClick = () => {
-        setHighlight(true);
         processVoice(textPhrase);
     }
 
@@ -70,13 +82,12 @@ function Pharse({
     const handleReset = () => {
         setRecorder(null);
         setPhraseVoice('');
-        setHighlight(false);
         setBtnDisabled(false);
         setIconMic(AudioNoneIcon);
-        onReset(keyPhrase);
+        onReset(recorder);
     }
 
-    return <Card className={`pharse-wrapper ${highlight ? 'hightlight' : ''}`} hoverable={true}>
+    return <Card className={`pharse-wrapper ${recorder ? 'hightlight' : ''}`}>
         <Row>
             <Col span={24}>
                 <Button
@@ -108,7 +119,6 @@ function Pharse({
 }
 
 Pharse.propTypes = {
-    keyPhrase: number.isRequired,
     textPhrase: string.isRequired,
     clean: bool,
     onRecord: func.isRequired,
