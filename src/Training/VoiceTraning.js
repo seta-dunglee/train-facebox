@@ -25,16 +25,16 @@ function VoiceTraning({ person }) {
         }
     }, [resetLoading]);
 
-    const handleClick = (recoder, indexPhrase) => {
-        let arrRecorders = [...recorders];
-        arrRecorders[indexPhrase] = recoder;
+    const handleClick = recoder => {
+        let arrRecorders = [...recorders, recoder];
         setRecorders(arrRecorders);
     }
 
-    const handleReset = indexPhrase => {
-        let arrRecorders = [...recorders];
-        arrRecorders.splice(indexPhrase);
-        setRecorders(arrRecorders);
+    const handleReset = recoder => {
+        if (recoder) {
+            const newArr = recorders.filter(item => item.audioUrl !== recoder.audioUrl);
+            setRecorders(newArr);
+        }
     }
 
     const handleSubmit = async () => {
@@ -75,7 +75,7 @@ function VoiceTraning({ person }) {
         <Col xs={24} md={12} className="input-section">
             <Button
                 type="primary" shape="round" icon="setting"
-                disabled={!recorders.length > 0}
+                disabled={!(recorders.length > 0)}
                 loading={loading}
                 onClick={handleSubmit}
             >
@@ -103,7 +103,6 @@ function VoiceTraning({ person }) {
                     phrases.map((el, index) =>
                         <Phrase
                             key={index}
-                            keyPhrase={index}
                             textPhrase={el}
                             onRecord={handleClick}
                             onReset={handleReset}
