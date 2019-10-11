@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { func, number, string } from 'prop-types';
+import React, { useState, useEffect } from 'react'
+import { func, number, string, bool } from 'prop-types';
 import { Row, Col, Card, Button, Icon, Tag } from 'antd';
 import recordAudio from '../heplers/recordAudio';
 import speedRecognition from '../heplers/speedRecognition';
@@ -9,12 +9,24 @@ const AudioNoneIcon = <Icon type="audio" />;
 const AudioIcon = <Icon type="audio" theme="twoTone" twoToneColor="red" />;
 const AudioOffIcon = <Icon type="audio" theme="twoTone" twoToneColor="gray" />;
 
-function Pharse(props) {
+function Pharse({
+    keyPhrase,
+    textPhrase = '',
+    clean = false,
+    onRecord = () => { },
+    onReset = () => { }
+}) {
     const [highlight, setHighlight] = useState(false);
     const [phraseVoice, setPhraseVoice] = useState('');
     const [recorder, setRecorder] = useState(null);
     const [iconMic, setIconMic] = useState(AudioNoneIcon);
     const [btnDisabled, setBtnDisabled] = useState(false);
+
+    useEffect(() => {
+        if (clean) {
+            handleReset();
+        }
+    }, [clean]);
 
     const processVoice = async dataPhrase => {
         const recording = await recordAudio();
@@ -40,13 +52,13 @@ function Pharse(props) {
             recognition.stop();
             const resultRecording = await recording.stop();
             setRecorder(resultRecording);
-            props.onRecord(resultRecording, props.keyPhrase);
+            onRecord(resultRecording, keyPhrase);
         }
     }
 
     const handleClick = () => {
         setHighlight(true);
-        processVoice(props.textPhrase);
+        processVoice(textPhrase);
     }
 
     const handlePlay = () => {
@@ -61,28 +73,35 @@ function Pharse(props) {
         setHighlight(false);
         setBtnDisabled(false);
         setIconMic(AudioNoneIcon);
-        props.onReset(props.keyPhrase);
+        onReset(keyPhrase);
     }
 
-    return <Card className={`pharseWrapper ${highlight ? 'hightlight' : ''}`} hoverable={true}>
+    return <Card className={`pharse-wrapper ${highlight ? 'hightlight' : ''}`} hoverable={true}>
         <Row>
-            <Col md={16} xs={24}>
+            <Col span={24}>
                 <Button
+                    className="btn-phrase"
                     size="large"
-                    onClick={handleClick} disabled={btnDisabled}>{iconMic}{props.textPhrase}</Button>
-                {
-                    phraseVoice && <Tag className="phraseVoice" color="gray">
-                        <Icon type="message" size="large" theme="twoTone" color="white" />{phraseVoice}
-                    </Tag>
-                }
+                    onClick={handleClick} disabled={btnDisabled}>{iconMic}{textPhrase}</Button>
             </Col>
-            <Col md={8} xs={24}>
-                {
-                    recorder && <Button size="large" icon="play-circle" shape="circle" onClick={handlePlay} />
-                }
-                {
-                    btnDisabled && <Button size="large" icon="reload" shape="circle" onClick={handleReset} />
-                }
+            <Col span={24}>
+                <Row gutter={8}>
+                    <Col span={16}>
+                        {
+                            phraseVoice && <Tag className="phrase-voice" color="gray">
+                                <Icon type="message" size="large" /><span>{phraseVoice}</span>
+                            </Tag>
+                        }
+                    </Col>
+                    <Col className="btn-action" span={8}>
+                        {
+                            recorder && <Button size="large" icon="play-circle" shape="circle" onClick={handlePlay} />
+                        }
+                        {
+                            btnDisabled && <Button size="large" icon="reload" shape="circle" onClick={handleReset} />
+                        }
+                    </Col>
+                </Row>
             </Col>
         </Row>
     </Card>
@@ -91,6 +110,7 @@ function Pharse(props) {
 Pharse.propTypes = {
     keyPhrase: number.isRequired,
     textPhrase: string.isRequired,
+    clean: bool,
     onRecord: func.isRequired,
     onReset: func.isRequired,
 }

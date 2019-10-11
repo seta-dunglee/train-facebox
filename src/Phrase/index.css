@@ -1,35 +1,55 @@
-.pharseWrapper.ant-card{
-    -webkit-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
-    box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+.pharse-wrapper.ant-card{
     margin: 5px;
 }
 
-.pharseWrapper.hightlight {
-    background: linear-gradient(45deg, #2196F3 30%, #21CBF3 90%);
+.pharse-wrapper.ant-card:first-child {
+    margin-top: 0;
 }
 
-.pharseWrapper:hover {
-    background: linear-gradient(45deg, #2196F3 30%, #21CBF3 90%) ;
+.pharse-wrapper.hightlight {
+    background-color: #1890ff;
+    border-color: #1890ff;
 }
 
-.pharseWrapper:hover button {
-    background: #ffffff;
+.pharse-wrapper.hightlight:hover {
+    border-color: rgba(0, 0, 0, 0.09);
+    -webkit-box-shadow: 0 2px 8px #40a9ff;
+    box-shadow: 0 2px 8px #40a9ff;
 }
 
-.pharseWrapper button {
-    margin:  10px 10px 10px 0;
+.pharse-wrapper .btn-action {
+    text-align: end;
 }
 
-.pharseWrapper .phraseVoice {
+.pharse-wrapper .btn-action button {
+    margin: 10px 0 0 10px;
+}
+
+.pharse-wrapper .btn-phrase {
+    height: auto;
+    min-height: 40px;
+    margin-right: 10px;
+    text-align: start;
+    width: 100%;
+    white-space: normal;
+}
+
+.pharse-wrapper .phrase-voice {
     font-size: 16px;
     line-height: unset;
+    margin-top: 10px;
+    padding: 0 15px;
+    white-space: normal;
 }
 
-.pharseWrapper .phraseVoice i {
-    margin-right: 20px;
+.pharse-wrapper .phrase-voice i {
+    margin: 0;
 }
 
-.pharseWrapper .ant-card-body {
+.pharse-wrapper .phrase-voice > span {
+    margin-left: 8px;
+}
+
+.pharse-wrapper .ant-card-body {
     padding : 12px;
 }
