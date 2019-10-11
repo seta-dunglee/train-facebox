@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Input, Icon, Button, Typography } from "antd";
+import { Row, Col, Input, Icon, Button, Typography, Tooltip } from "antd";
 import Gallery from "react-grid-gallery";
 import { Spin } from "antd";
 import VideoCapturing from "../VideoCapturing";
@@ -16,6 +16,17 @@ export default function FaceTraining({
   const [loading, setLoading] = React.useState(false);
   const [takePhoto, setTakePhoto] = React.useState(false);
   const [resultTrain, setResultTrain] = React.useState(null);
+  const [resetLoading, setResetLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    const timeId = setTimeout(() => {
+      setResetLoading(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [resetLoading]);
 
   const onSelectImage = index => {
     setImages(images =>
@@ -96,12 +107,13 @@ export default function FaceTraining({
   };
 
   const onReload = () => {
-    setinputUrl('');
+    setResetLoading(true);
+    setinputUrl("");
     setImages([]);
     setLoading(false);
     setTakePhoto(false);
     setResultTrain(null);
-  }
+  };
   const disabledTrain = images.filter(image => image.isSelected).length === 0;
 
   return (
@@ -127,48 +139,55 @@ export default function FaceTraining({
           icon="camera"
           onClick={onTakePhoto}
         />
-        <Button
-          type="primary"
-          shape="round"
-          icon="setting"
-          disabled={disabledTrain}
-          loading={loading}
-          onClick={onTrain}
-        >
-          Train
-        </Button>
+        <Tooltip title="Select images then click train">
+          <Button
+            type="primary"
+            shape="round"
+            icon="setting"
+            disabled={disabledTrain}
+            loading={loading}
+            onClick={onTrain}
+          >
+            Train
+          </Button>
+        </Tooltip>,
+        
         <Button
           type="primary"
           shape="round"
           icon="reload"
-          loading={loading}
+          loading={resetLoading}
           onClick={onReload}
         >
           Reset
         </Button>
         {resultTrain && (
-          <Text type="secondary" style={{marginLeft: 10}}>
+          <Text type="secondary" style={{ marginLeft: 10 }}>
             Success: {resultTrain.success}/{resultTrain.total}
           </Text>
         )}
       </Row>
       <Row className="result-search">
-        {takePhoto && (
-          <div className="camera-wapper">
-            {<VideoCapturing onCaptureSuccess={onCaptureSuccess} />}
-          </div>
-        )}
-        <div className="gallery-images">
-          {loading ? (
-            <Spin size="large" />
-          ) : (
-            <Gallery
-              images={images}
-              enableImageSelection
-              onSelectImage={onSelectImage}
-            />
+        <Col span={12}>
+          {takePhoto && (
+            <div className="camera-wapper">
+              {<VideoCapturing onCaptureSuccess={onCaptureSuccess} />}
+            </div>
           )}
-        </div>
+        </Col>
+        <Col span={12}>
+          <div className="gallery-images">
+            {loading ? (
+              <Spin size="large" />
+            ) : (
+              <Gallery
+                images={images}
+                enableImageSelection
+                onSelectImage={onSelectImage}
+              />
+            )}
+          </div>
+        </Col>
       </Row>
     </div>
   );

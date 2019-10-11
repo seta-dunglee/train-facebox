@@ -12,6 +12,9 @@ export default function PersonForm({formSubmit}) {
     const onNameChange = (e) => {
         setName(e.target.value);
     }
+    const onPressEnter = (e) => {
+        formSubmit(name);
+    }
 
     return (
         <div>
@@ -22,6 +25,7 @@ export default function PersonForm({formSubmit}) {
                 style={{ width: 250 }}
                 size="large"
                 onChange={onNameChange}
+                onPressEnter={onPressEnter}
               />
               <div className="btn-submit-name">
                 <Button type="primary" onClick={onClickSubmit} disabled={!name}>
