@@ -5,6 +5,7 @@ import Phrase from '../Phrase';
 import { createAssetAudio } from '../services/audio';
 
 function VoiceTraning({ person }) {
+    const defaultDisable = -1;
     const [phrases] = useState([
         "I can drink coffee everyday",
         "We can join this meeting",
@@ -14,6 +15,7 @@ function VoiceTraning({ person }) {
     const [loading, setLoading] = useState(false);
     const [resetLoading, setResetLoading] = useState(false);
     const [resultTrain, setResultTrain] = useState('');
+    const [selectedIndex, setSelectedIndex] = useState(defaultDisable);
 
     useEffect(() => {
         const timeId = setTimeout(() => {
@@ -26,8 +28,12 @@ function VoiceTraning({ person }) {
     }, [resetLoading]);
 
     const handleClick = recoder => {
-        let arrRecorders = [...recorders, recoder];
-        setRecorders(arrRecorders);
+        if(recoder) {
+            let arrRecorders = [...recorders, recoder];
+            setRecorders(arrRecorders);
+        }
+
+        setSelectedIndex(defaultDisable);
     }
 
     const handleReset = recoder => {
@@ -35,6 +41,8 @@ function VoiceTraning({ person }) {
             const newArr = recorders.filter(item => item.audioUrl !== recoder.audioUrl);
             setRecorders(newArr);
         }
+
+        setSelectedIndex(defaultDisable);
     }
 
     const handleSubmit = async () => {
@@ -69,6 +77,11 @@ function VoiceTraning({ person }) {
         setRecorders([]);
         setLoading(false);
         setResultTrain('');
+        setSelectedIndex(defaultDisable);
+    }
+
+    const handleActiveItem = index => {
+        setSelectedIndex(index);
     }
 
     return <Row className="voice-training">
@@ -103,10 +116,13 @@ function VoiceTraning({ person }) {
                     phrases.map((el, index) =>
                         <Phrase
                             key={index}
+                            keyPhrase={index}
                             textPhrase={el}
                             onRecord={handleClick}
                             onReset={handleReset}
+                            onActive={handleActiveItem}
                             clean={resetLoading}
+                            disabled={selectedIndex !== defaultDisable && selectedIndex !== index}
                         />
                     )
                     : <Row><Empty description={'No data'} image={Empty.PRESENTED_IMAGE_SIMPLE} /></Row>

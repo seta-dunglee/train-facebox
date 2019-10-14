@@ -10,10 +10,13 @@ const AudioIcon = <Icon type="audio" theme="twoTone" twoToneColor="red" />;
 const AudioOffIcon = <Icon type="audio" theme="twoTone" twoToneColor="gray" />;
 
 function Pharse({
+    keyPhrase = 0,
     textPhrase = '',
     clean = false,
     onRecord = () => { },
-    onReset = () => { }
+    onReset = () => { },
+    disabled = false,
+    onActive = () => { },
 }) {
     const [phraseVoice, setPhraseVoice] = useState('');
     const [recorder, setRecorder] = useState(null);
@@ -27,10 +30,10 @@ function Pharse({
     }, [clean]);
 
     useEffect(() => {
-        if(recorder) {
+        if (recorder) {
             setIconMic(AudioOffIcon);
             setBtnDisabled(true);
-        }else {
+        } else {
             setIconMic(AudioNoneIcon);
             setBtnDisabled(false);
         }
@@ -51,7 +54,7 @@ function Pharse({
             setIconMic(AudioOffIcon);
         }
 
-        recognition.onerror = ()  => {
+        recognition.onerror = () => {
             setRecorder(null);
             setPhraseVoice('');
         }
@@ -70,6 +73,7 @@ function Pharse({
     }
 
     const handleClick = () => {
+        onActive(keyPhrase);
         processVoice(textPhrase);
     }
 
@@ -93,7 +97,7 @@ function Pharse({
                 <Button
                     className="btn-phrase"
                     size="large"
-                    onClick={handleClick} disabled={btnDisabled}>{iconMic}{textPhrase}</Button>
+                    onClick={handleClick} disabled={btnDisabled || disabled}>{iconMic}{textPhrase}</Button>
             </Col>
             <Col span={24}>
                 <Row gutter={8}>
@@ -106,10 +110,10 @@ function Pharse({
                     </Col>
                     <Col className="btn-action" span={8}>
                         {
-                            recorder && <Button size="large" icon="play-circle" shape="circle" onClick={handlePlay} />
+                            recorder && <Button size="large" icon="play-circle" shape="circle" onClick={handlePlay} disabled={disabled} />
                         }
                         {
-                            btnDisabled && <Button size="large" icon="reload" shape="circle" onClick={handleReset} />
+                            btnDisabled && <Button size="large" icon="reload" shape="circle" onClick={handleReset} disabled={disabled} />
                         }
                     </Col>
                 </Row>
@@ -119,10 +123,13 @@ function Pharse({
 }
 
 Pharse.propTypes = {
+    keyPhrase: number.isRequired,
     textPhrase: string.isRequired,
     clean: bool,
     onRecord: func.isRequired,
     onReset: func.isRequired,
+    disabled: bool,
+    onActive: func,
 }
 
 export default Pharse;
