@@ -23,7 +23,7 @@ function App() {
   
   return (
     <Layout className="layout">
-      <Header>
+      <Header className="header">
         <Title level={2}>Biometric Enrollment</Title>
       </Header>
       <Content>
