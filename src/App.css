@@ -8,15 +8,8 @@
   height: 40vmin;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header {
+  background-color: #2196F3;
 }
 
 .App-link {
@@ -24,7 +17,7 @@
 }
 
 .ant-layout-header h2 {
-  color: #ddd;
+  color: #ffffff;
   text-align: center;
   margin: 10px;
 }
@@ -33,6 +26,7 @@
   background: #fff;
   padding: 24px;
   min-height: calc(100vh - 130px);
+  margin-left: 200px;
 }
 
 .breadcrumb {
@@ -105,4 +99,18 @@
 
 .trigger:hover {
   color: #1890ff;
+}
+
+.sidebar{
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  background-color: #FAFAFA;
+  border-right: 1px solid #e8e8e8;
+}
+
+.sidebar-menu{
+  background-color: #FAFAFA;
+  border-right: none;
 }

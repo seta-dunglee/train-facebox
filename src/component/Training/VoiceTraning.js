@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Empty, Row, Col, Typography } from 'antd';
 import { object } from 'prop-types';
 import Phrase from '../Phrase';
-import { createAssetAudio } from '../services/audio';
+import { createAssetAudio } from '../../services/audio';
 
 function VoiceTraning({ person }) {
     const defaultDisable = -1;

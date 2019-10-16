@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
 import { Typography, Layout, Menu, Icon } from "antd";
-import PersonForm from "./PersonForm";
-import Training from "./Training";
+import PersonForm from "./component/PersonForm";
+import Training from "./component/Training";
+import Users from "./component/Users";
 import _ from "lodash";
 
 const { Title } = Typography;
@@ -23,38 +24,29 @@ function App() {
   };
   return (
     <Layout>
-      <Sider
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0
-        }}
-      >
-        <div className="logo">CSSO</div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1">
-            <Icon type="user" />
-            <span>nav 1</span>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="video-camera" />
-            <span>nav 2</span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="upload" />
-            <span>nav 3</span>
-          </Menu.Item>
-        </Menu>
-      </Sider>
       <Layout className="layout">
-        <Header className="hearder">
+        <Header className="header">
           <Title level={2}>Activate CSSO Training</Title>
         </Header>
         <Content>
+          <Layout>
+            <Sider className="sidebar">
+              <Menu className="sidebar-menu" mode="inline" defaultSelectedKeys={["1"]}>
+                <Menu.Item key="1">
+                  <Icon type="user" />
+                  <span>Persion</span>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  <Icon type="setting" />
+                  <span>Configs</span>
+                </Menu.Item>
+              </Menu>
+            </Sider>
+          </Layout>
           <div className="content-body">
             {/* <div className="container"> */}
-            {(function() {
+            <Users/>
+            {/* {(function() {
               switch (step) {
                 case PERSIONFORM:
                   return <PersonForm formSubmit={formSubmit} />;
@@ -63,7 +55,7 @@ function App() {
                 default:
                   return null;
               }
-            })()}
+            })()} */}
             {/* </div> */}
           </div>
         </Content>

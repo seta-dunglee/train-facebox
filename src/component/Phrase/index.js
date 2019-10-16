@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { func, number, string, bool } from 'prop-types';
 import { Row, Col, Card, Button, Icon, Tag } from 'antd';
-import recordAudio from '../heplers/recordAudio';
-import speedRecognition from '../heplers/speedRecognition';
+import recordAudio from '../../heplers/recordAudio';
+import speedRecognition from '../../heplers/speedRecognition';
 import './index.css';
 
 const AudioNoneIcon = <Icon type="audio" />;
