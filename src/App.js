@@ -24,7 +24,7 @@ function App() {
   return (
     <Layout className="layout">
       <Header>
-        <Title level={2}>Activate CSSO Training</Title>
+        <Title level={2}>Biometric Enrollment</Title>
       </Header>
       <Content>
         <div className="content-body">
