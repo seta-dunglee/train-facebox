@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter, Route, Switch, Redirect, Link } from "react-router-dom";
 import "./App.css";
 import { Typography, Layout, Menu, Icon } from "antd";
 import PersonForm from "./component/PersonForm";
@@ -22,31 +23,51 @@ function App() {
     });
     setStep(TRAINING);
   };
+
+  const onMenuClick = ({ item, key, keyPath, domEvent }) => {
+    let route = `/${key}`;
+    return <Redirect to={route} />;
+  };
+
   return (
-    <Layout>
-      <Layout className="layout">
-        <Header className="header">
-          <Title level={2}>Activate CSSO Training</Title>
-        </Header>
-        <Content>
-          <Layout>
-            <Sider className="sidebar">
-              <Menu className="sidebar-menu" mode="inline" defaultSelectedKeys={["1"]}>
-                <Menu.Item key="1">
-                  <Icon type="user" />
-                  <span>Persion</span>
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Icon type="setting" />
-                  <span>Configs</span>
-                </Menu.Item>
-              </Menu>
-            </Sider>
-          </Layout>
-          <div className="content-body">
-            {/* <div className="container"> */}
-            <Users/>
-            {/* {(function() {
+    <BrowserRouter>
+      <Layout>
+        <Layout className="layout">
+          <Header className="header">
+            <Title level={2}>Activate CSSO Training</Title>
+          </Header>
+          <Content>
+            <Layout>
+              <Sider className="sidebar">
+                <Menu
+                  className="sidebar-menu"
+                  mode="inline"
+                  defaultSelectedKeys={["users"]}
+                  onSelect={onMenuClick}
+                >
+                  <Menu.Item key="users">
+                    <Link to="/users">
+                      <Icon type="user" />
+                      <span>Persion</span>
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="configs">
+                    <Link to="/configs">
+                      <Icon type="setting" />
+                      <span>Configs</span>
+                    </Link>
+                  </Menu.Item>
+                </Menu>
+              </Sider>
+            </Layout>
+            <div className="content-body">
+              <Switch>
+                <Route path="/users" component={Users} />
+                {/* <Route path="/reset-password" component={ResetPassword} /> */}
+              </Switch>
+              {/* <div className="container"> */}
+              {/* <Users/> */}
+              {/* {(function() {
               switch (step) {
                 case PERSIONFORM:
                   return <PersonForm formSubmit={formSubmit} />;
@@ -56,11 +77,12 @@ function App() {
                   return null;
               }
             })()} */}
-            {/* </div> */}
-          </div>
-        </Content>
+              {/* </div> */}
+            </div>
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </BrowserRouter>
   );
 }
 
