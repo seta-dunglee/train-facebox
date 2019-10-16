@@ -74,13 +74,35 @@
   right: 0;
 }
 
-
-
 .input-name{
   text-align: center;
 }
 
-
 .btn-submit-name{
   margin-top: 15px;
+}
+
+.logo{
+  height: 64px;
+    color: #fff;
+    text-align: center;
+    line-height: 64px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.hearder{
+  padding: 0 15px;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: #fff;
+}
+
+.trigger:hover {
+  color: #1890ff;
 }
