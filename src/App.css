@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #2196F3;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
 }
 
 .ant-layout-header h2 {
-  color: #ddd;
+  color: #ffffff;
   text-align: center;
   margin: 10px;
 }
