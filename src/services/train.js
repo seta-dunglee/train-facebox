@@ -103,7 +103,7 @@ function getWriteUrl() {
 
   return callGraphQl(config.graphqlUrl, query, {}, config.authToken);
 }
-function createEntity(libraryId, name, description, profileImageUrl, jsonData, isPublished = false){
+async function createEntity(libraryId, name, description = '', profileImageUrl = '', jsonData= {}, isPublished = false){
   const query = `
   mutation ($newEntity: CreateEntity!) {
     createEntity (input: $newEntity) {
@@ -121,13 +121,19 @@ function createEntity(libraryId, name, description, profileImageUrl, jsonData, i
     isPublished: isPublished
   };
 
-  return callGraphQl(config.graphqlUrl, query, {newEntity: newEntity}, config.authToken).then(response => {
-    const result = get(response, 'data.createEntity');
-    return {
-      entityId: result.id,
-      libraryId: result.libraryId
-    };
-  });
+  const res = await callGraphQl(config.graphqlUrl, query, {newEntity: newEntity}, config.authToken);
+  // .then(response => {
+  //   const [data, errors] = get(response, 'data.createEntity');
+    console.log(res);
+    // if(errors && errors.length > 0){
+    //   alert(get(errors, [0, 'message']));
+    //   return null;
+    // }
+    // return {
+    //   entityId: data.id,
+    //   libraryId: data.libraryId
+    // };
+  // });
 }
 
 function updateEntity(entityId, name, description, profileImageUrl, jsonData){
@@ -274,4 +280,7 @@ const createAssetAudio = async file => {
   };
 };
 
-export default trainFace;
+export {
+  trainFace,
+  createEntity
+};

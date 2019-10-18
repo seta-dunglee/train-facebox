@@ -1,44 +1,21 @@
 import React from "react";
 import { getAll } from "../../services/user";
 import { Table } from "antd";
+import { withRouter } from "react-router-dom";
+import { PageHeader, Button, Descriptions } from "antd";
+
 const columns = [
+  {
+    title: "ID",
+    dataIndex: "id"
+  },
   {
     title: "Name",
     dataIndex: "name"
   },
   {
-    title: "Age",
-    dataIndex: "age"
-  },
-  {
-    title: "Address",
-    dataIndex: "address"
-  }
-];
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park"
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park"
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park"
-  },
-  {
-    key: "4",
-    name: "Disabled User",
-    age: 99,
-    address: "Sidney No. 1 Lake Park"
+    title: "Lasted train",
+    dataIndex: "lasted_train"
   }
 ];
 
@@ -57,28 +34,44 @@ const rowSelection = {
   })
 };
 
-const onRowClick = (row) => {
-    
-}
-
-export default function Users() {
+export default function Users({ history }) {
   const [users, setUsers] = React.useState([]);
+
+  const onRowClick = row => {
+    history.push(`/users/${row.id}`);
+  };
 
   React.useEffect(() => {
     const init = async () => {
-      const data = await getAll();
-      console.log(data);
+      let data= await getAll();
+      setUsers(data.map(row => ({...row, key: row.id})));
     };
     init();
   }, []);
 
+  const onAddUser = () => {
+    history.push('/new');
+  }
+
   return (
     <div>
+      <div>
+        <PageHeader
+          ghost={false}
+          title="Users List"
+          subTitle="Users list has been trained"
+          extra={[
+            <Button key="3" type="primary" onClick={onAddUser}>Add User</Button>,
+          ]}
+          style={{paddingRight:0, paddingLeft:0}}
+        >
+        </PageHeader>
+      </div>
       <Table
         bordered
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={data}
+        dataSource={users}
         onRowClick={onRowClick}
       />
     </div>

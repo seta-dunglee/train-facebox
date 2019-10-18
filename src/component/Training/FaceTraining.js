@@ -3,7 +3,7 @@ import { Row, Col, Input, Icon, Button, Typography, Tooltip } from "antd";
 import Gallery from "react-grid-gallery";
 import { Spin } from "antd";
 import VideoCapturing from "../VideoCapturing";
-import trainFace from "../../services/train";
+import {trainFace} from "../../services/train";
 
 const { Text } = Typography;
 export default function FaceTraining({

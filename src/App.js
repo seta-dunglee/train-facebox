@@ -5,30 +5,14 @@ import { Typography, Layout, Menu, Icon } from "antd";
 import PersonForm from "./component/PersonForm";
 import Training from "./component/Training";
 import Users from "./component/Users";
+import UserTraining from "./pages/UserTraining";
 import _ from "lodash";
 
 const { Title } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
-const PERSIONFORM = 0;
-const TRAINING = 1;
+
 
 function App() {
-  const [step, setStep] = React.useState(0);
-  const [person, setPerson] = React.useState();
-
-  const formSubmit = name => {
-    setPerson({
-      id: "vtn_" + _.toLower(name.replace(" ", "_")),
-      name
-    });
-    setStep(TRAINING);
-  };
-
-  const onMenuClick = ({ item, key, keyPath, domEvent }) => {
-    let route = `/${key}`;
-    return <Redirect to={route} />;
-  };
-
   return (
     <BrowserRouter>
       <Layout>
@@ -43,7 +27,6 @@ function App() {
                   className="sidebar-menu"
                   mode="inline"
                   defaultSelectedKeys={["users"]}
-                  onSelect={onMenuClick}
                 >
                   <Menu.Item key="users">
                     <Link to="/users">
@@ -63,21 +46,12 @@ function App() {
             <div className="content-body">
               <Switch>
                 <Route path="/users" component={Users} />
+                <Route path="/users/:id" component={Training} />
+                <Route path="/new" component={UserTraining} />
+                <Redirect exact from="/" to="/users" />
                 {/* <Route path="/reset-password" component={ResetPassword} /> */}
               </Switch>
-              {/* <div className="container"> */}
-              {/* <Users/> */}
-              {/* {(function() {
-              switch (step) {
-                case PERSIONFORM:
-                  return <PersonForm formSubmit={formSubmit} />;
-                case TRAINING:
-                  return <Training person={person} />;
-                default:
-                  return null;
-              }
-            })()} */}
-              {/* </div> */}
+              
             </div>
           </Content>
         </Layout>
